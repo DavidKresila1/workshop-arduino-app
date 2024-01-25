@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900');
+
+body {
+    background-color: #daeaf3; /* Lighten($color1, 10%) */
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+.weather-wrapper {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.weather-card {
+    margin: 20px 5px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    width: 270px;
+    height: 270px;
+    background-color: white; /* $color2 */
+    box-shadow: 0px 0px 25px 1px rgba(50, 50, 50, 0.1);
+    animation: appear 500ms ease-out forwards;
+}
+
+.weather-card h1 {
+    position: absolute;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 60px;
+    color: #b8b8b8; /* $color3 */
+    bottom: 20px; /* Adjusted position for better visibility */
+    left: 35px;
+    opacity: 0;
+    transform: translateX(20px); /* Adjusted initial position */
+    animation: title-appear 800ms ease-out 500ms forwards;
+}
+
+.weather-card p {
+    position: absolute;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 28px;
+    color: #c8dae6; /* lighten($color3, 10%) */
+    bottom: 0;
+    left: 35px;
+    animation: title-appear 1s ease-out 500ms forwards;
+}
+
+.weather-icon {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    float: right;
+    margin: 40px 40px 0 0;
+    animation: weather-icon-move 5s ease-in-out infinite;
+}
+
+.sun,
+.half-sunny {
+    border-radius: 50%;
+    box-shadow: rgba(255, 255, 0, 0.1) 0 0 0 4px;
+    animation: light 800ms ease-in-out infinite alternate, weather-icon-move 5s ease-in-out infinite;
+}
+
+.sun {
+    background: #ffcd41; /* $color4 */
+}
+
+.half-sunny {
+    background: linear-gradient(90deg, #ffcd41 50%, transparent 50%);
+}
+
+.cloud {
+    margin-right: 60px;
+    background: #c8dae6; /* darken($color1, 5%) */
+    border-radius: 20px;
+    width: 50px;
+    height: 25px;
+    position: relative;
+
+    &:before {
+        content: "";
+        position: absolute;
+        border-radius: 10px;
+        background-color: transparent;
+        width: 4px;
+        height: 12px;
+        left: 0;
+        top: 31px;
+        transform: rotate(30deg);
+        animation: rain 800ms ease-in-out infinite alternate;
+    }
+}
+
+
+@keyframes rain {
+    from {
+        box-shadow:
+            #2092a9 8px 0px,
+            #2092a9 32px -6px,
+            #2092a9 20px 0px;
+    }
+    to {
+        box-shadow:
+            #2092a9 8px 6px,
+            #2092a9 32px 0px,
+            #2092a9 20px 6px;
+    }
+}
+
+@keyframes weather-icon-move {
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.snow::before,
+.snow::after {
+    content: "\2744";
+    position: absolute;
+    width: 0px;
+    height: 0px; /* Adjust arm length as needed */
+    background: #C8DAE6; /* Set the appropriate background color for snow */
+    top: 50%;
+    left: 50%;
+    font-size: 70px;
+    color: #c8dae6;
+    transform: translate(-50%, -50%);
+}
+
+.snow::before {
+    transform: translate(-50%, -50%);
+}
+
+.snow::after {
+    transform: translate(-50%, -50%);
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-40px);
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    75% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes title-appear {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
